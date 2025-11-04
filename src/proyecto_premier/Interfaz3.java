@@ -41,13 +41,13 @@ public class Interfaz3 extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        Fondo.setBackground(new java.awt.Color(204, 236, 255));
+        Fondo.setBackground(new java.awt.Color(255, 255, 255));
 
-        Header.setBackground(new java.awt.Color(51, 204, 255));
+        Header.setBackground(new java.awt.Color(102, 102, 255));
 
-        jLabel1.setBackground(new java.awt.Color(0, 0, 0));
+        jLabel1.setBackground(new java.awt.Color(102, 0, 0));
         jLabel1.setFont(new java.awt.Font("Swis721 BT", 1, 56)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(204, 236, 255));
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Proyecto Premier");
 
@@ -98,11 +98,11 @@ public class Interfaz3 extends javax.swing.JFrame {
         jPanel1.setOpaque(false);
         jPanel1.setLayout(null);
 
+        jButton1.setBackground(new java.awt.Color(102, 102, 255));
         jButton1.setFont(new java.awt.Font("Swis721 Cn BT", 1, 36)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(51, 204, 255));
+        jButton1.setForeground(new java.awt.Color(255, 255, 255));
         jButton1.setText("Ingresar Registros");
-        jButton1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(51, 204, 255), 5, true));
-        jButton1.setContentAreaFilled(false);
+        jButton1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(153, 153, 153), 2, true));
         jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton1.setFocusable(false);
         jButton1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -116,11 +116,11 @@ public class Interfaz3 extends javax.swing.JFrame {
         jPanel1.add(jButton1);
         jButton1.setBounds(0, 0, 600, 100);
 
+        jButton2.setBackground(new java.awt.Color(102, 102, 255));
         jButton2.setFont(new java.awt.Font("Swis721 Cn BT", 1, 36)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(51, 204, 255));
+        jButton2.setForeground(new java.awt.Color(255, 255, 255));
         jButton2.setText("Revisar Registros");
-        jButton2.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(51, 204, 255), 5, true));
-        jButton2.setContentAreaFilled(false);
+        jButton2.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(153, 153, 153), 2, true));
         jButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton2.setFocusable(false);
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -131,11 +131,11 @@ public class Interfaz3 extends javax.swing.JFrame {
         jPanel1.add(jButton2);
         jButton2.setBounds(0, 150, 600, 100);
 
+        jButton3.setBackground(new java.awt.Color(255, 0, 0));
         jButton3.setFont(new java.awt.Font("Swis721 Cn BT", 1, 36)); // NOI18N
-        jButton3.setForeground(new java.awt.Color(51, 204, 255));
+        jButton3.setForeground(new java.awt.Color(255, 255, 255));
         jButton3.setText("Salir");
-        jButton3.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(51, 204, 255), 5, true));
-        jButton3.setContentAreaFilled(false);
+        jButton3.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(153, 153, 153), 2, true));
         jButton3.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton3.setFocusable(false);
         jPanel1.add(jButton3);
