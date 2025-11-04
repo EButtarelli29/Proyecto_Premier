@@ -6,6 +6,7 @@ public class Conexion {
     public Conexion() {
     String user = "root";
     String key = "";
+    String urlBase = "jdbc:mysql://localhost:3306/";
     String url = "jdbc:mysql://localhost:3306/PremierDataBase";
     Connection conexion;
     Statement stmt;
@@ -28,16 +29,18 @@ public class Conexion {
     }
 
     try {
-        conexion = DriverManager.getConnection(url, user, key);
+        conexion = DriverManager.getConnection(urlBase, user, key);
+        stmt = conexion.createStatement();
+        stmt.execute(crearDB);
+        conexion.close();
         System.out.println("Base de datos conectada!");
     } catch (SQLException e) {
         throw new IllegalStateException("Error al conectar!", e);
     }
     
     try {
+        conexion = DriverManager.getConnection(url, user, key);
         stmt = conexion.createStatement();
-        
-        stmt.execute(crearDB);
         stmt.execute(crearTabla);
         System.out.println("Base de datos y tabla creada!");
     } catch (SQLException e) {
