@@ -1,17 +1,18 @@
 
 package proyecto_premier;
-
 import java.awt.Image;
 import javax.swing.*;
 
-public class RevRegistros extends javax.swing.JFrame {
+public class Interfaz extends javax.swing.JFrame {
 
-    public RevRegistros() {
-        setTitle("Proyecto Premier - Historial de registros");
+
+    public Interfaz() {
+        setTitle("Proyecto Premier - Página Principal");
         initComponents();
         userBtn.setIcon(setIcono("/img/userIconBlanco.png", userBtn));
         configBtn.setIcon(setIcono("/img/configIconBlanco.png", configBtn));
     }
+    
 
     public Icon setIcono(String url, JButton boton) {
         ImageIcon icon = new ImageIcon(getClass().getResource(url));
@@ -28,17 +29,20 @@ public class RevRegistros extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
+        Fondo = new javax.swing.JPanel();
         Header = new javax.swing.JPanel();
         titleLabel = new javax.swing.JLabel();
         configBtn = new javax.swing.JButton();
         userBtn = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        ingRegBtn = new javax.swing.JButton();
+        revRegBtn = new javax.swing.JButton();
+        exitBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setBackground(new java.awt.Color(255, 255, 255));
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        Fondo.setBackground(new java.awt.Color(255, 255, 255));
 
         Header.setBackground(new java.awt.Color(102, 102, 255));
 
@@ -77,7 +81,7 @@ public class RevRegistros extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Segoe UI Light", 2, 24)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(204, 204, 204));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("Historial de registros");
+        jLabel2.setText("Página principal");
 
         javax.swing.GroupLayout HeaderLayout = new javax.swing.GroupLayout(Header);
         Header.setLayout(HeaderLayout);
@@ -106,77 +110,117 @@ public class RevRegistros extends javax.swing.JFrame {
                 .addContainerGap(37, Short.MAX_VALUE))
         );
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        jPanel1.setOpaque(false);
+        jPanel1.setLayout(null);
+
+        ingRegBtn.setBackground(new java.awt.Color(102, 102, 255));
+        ingRegBtn.setFont(new java.awt.Font("Swis721 Cn BT", 1, 36)); // NOI18N
+        ingRegBtn.setForeground(new java.awt.Color(255, 255, 255));
+        ingRegBtn.setText("Ingresar Registros");
+        ingRegBtn.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(153, 153, 153), 2, true));
+        ingRegBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        ingRegBtn.setFocusable(false);
+        ingRegBtn.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        ingRegBtn.setIconTextGap(0);
+        ingRegBtn.setMargin(new java.awt.Insets(0, 0, 0, 0));
+        ingRegBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ingRegBtnActionPerformed(evt);
+            }
+        });
+        jPanel1.add(ingRegBtn);
+        ingRegBtn.setBounds(0, 0, 600, 100);
+
+        revRegBtn.setBackground(new java.awt.Color(102, 102, 255));
+        revRegBtn.setFont(new java.awt.Font("Swis721 Cn BT", 1, 36)); // NOI18N
+        revRegBtn.setForeground(new java.awt.Color(255, 255, 255));
+        revRegBtn.setText("Revisar Registros");
+        revRegBtn.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(153, 153, 153), 2, true));
+        revRegBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        revRegBtn.setFocusable(false);
+        revRegBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                revRegBtnActionPerformed(evt);
+            }
+        });
+        jPanel1.add(revRegBtn);
+        revRegBtn.setBounds(0, 150, 600, 100);
+
+        exitBtn.setBackground(new java.awt.Color(255, 0, 0));
+        exitBtn.setFont(new java.awt.Font("Swis721 Cn BT", 1, 36)); // NOI18N
+        exitBtn.setForeground(new java.awt.Color(255, 255, 255));
+        exitBtn.setText("Salir");
+        exitBtn.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(153, 153, 153), 2, true));
+        exitBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        exitBtn.setFocusable(false);
+        exitBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                exitBtnActionPerformed(evt);
+            }
+        });
+        jPanel1.add(exitBtn);
+        exitBtn.setBounds(0, 300, 600, 100);
+
+        javax.swing.GroupLayout FondoLayout = new javax.swing.GroupLayout(Fondo);
+        Fondo.setLayout(FondoLayout);
+        FondoLayout.setHorizontalGroup(
+            FondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(Header, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(FondoLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 600, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        FondoLayout.setVerticalGroup(
+            FondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(FondoLayout.createSequentialGroup()
                 .addComponent(Header, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 635, Short.MAX_VALUE))
+                .addGap(103, 103, 103)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 399, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(112, Short.MAX_VALUE))
         );
 
-        getContentPane().add(jPanel1, java.awt.BorderLayout.CENTER);
+        getContentPane().add(Fondo, java.awt.BorderLayout.CENTER);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void configBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_configBtnActionPerformed
-        // TODO add your handling code here:
+        new ConfigFrame().setVisible(true);
     }//GEN-LAST:event_configBtnActionPerformed
 
     private void userBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_userBtnActionPerformed
-        // TODO add your handling code here:
+        new UserFrame().setVisible(true);
     }//GEN-LAST:event_userBtnActionPerformed
+
+    private void ingRegBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ingRegBtnActionPerformed
+        this.setVisible(false);
+        new IngRegistros().setVisible(true);
+    }//GEN-LAST:event_ingRegBtnActionPerformed
+
+    private void revRegBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_revRegBtnActionPerformed
+        this.setVisible(false);
+        new RevRegistros().setVisible(true);
+    }//GEN-LAST:event_revRegBtnActionPerformed
+
+    private void exitBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitBtnActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_exitBtnActionPerformed
 
     private void titleLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_titleLabelMouseClicked
         this.setVisible(false);
         new Interfaz().setVisible(true);
     }//GEN-LAST:event_titleLabelMouseClicked
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(RevRegistros.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(RevRegistros.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(RevRegistros.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(RevRegistros.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new RevRegistros().setVisible(true);
-            }
-        });
-    }
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel Fondo;
     private javax.swing.JPanel Header;
     private javax.swing.JButton configBtn;
+    private javax.swing.JButton exitBtn;
+    private javax.swing.JButton ingRegBtn;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JButton revRegBtn;
     private javax.swing.JLabel titleLabel;
     private javax.swing.JButton userBtn;
     // End of variables declaration//GEN-END:variables
