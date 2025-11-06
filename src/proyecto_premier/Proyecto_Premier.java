@@ -6,5 +6,5 @@ public class Proyecto_Premier{
         // Conexion conect = new Conexion();
         new Interfaz().setVisible(true);
     }
-    
+         
 }

@@ -105,7 +105,7 @@ public class ConfigFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_escBtnActionPerformed
 
     private void darkModeBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_darkModeBtnActionPerformed
-        jPanel1.setBackground(Color.black);
+        jPanel1.setBackground(Color.BLACK);
     }//GEN-LAST:event_darkModeBtnActionPerformed
 
     public static void main(String args[]) {
