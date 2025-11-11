@@ -9,6 +9,7 @@ import java.awt.Color;
 public class ConfigFrame extends javax.swing.JFrame {
 
     public ConfigFrame() {
+        setTitle("Proyecto Premier - Configuración");
         initComponents();
     }
 

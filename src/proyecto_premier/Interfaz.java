@@ -7,7 +7,7 @@ public class Interfaz extends javax.swing.JFrame {
 
 
     public Interfaz() {
-        setTitle("Proyecto Premier - Página Principal");
+        setTitle("Proyecto Premier - Menú Principal");
         initComponents();
         userBtn.setIcon(setIcono("/img/userIconBlanco.png", userBtn));
         configBtn.setIcon(setIcono("/img/configIconBlanco.png", configBtn));
@@ -81,7 +81,7 @@ public class Interfaz extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Segoe UI Light", 2, 24)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(204, 204, 204));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("Página principal");
+        jLabel2.setText("Menú principal");
 
         javax.swing.GroupLayout HeaderLayout = new javax.swing.GroupLayout(Header);
         Header.setLayout(HeaderLayout);
@@ -116,7 +116,7 @@ public class Interfaz extends javax.swing.JFrame {
         ingRegBtn.setBackground(new java.awt.Color(102, 102, 255));
         ingRegBtn.setFont(new java.awt.Font("Swis721 Cn BT", 1, 36)); // NOI18N
         ingRegBtn.setForeground(new java.awt.Color(255, 255, 255));
-        ingRegBtn.setText("Ingresar Registros");
+        ingRegBtn.setText("Ingresar registros");
         ingRegBtn.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(153, 153, 153), 2, true));
         ingRegBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         ingRegBtn.setFocusable(false);
@@ -134,7 +134,7 @@ public class Interfaz extends javax.swing.JFrame {
         revRegBtn.setBackground(new java.awt.Color(102, 102, 255));
         revRegBtn.setFont(new java.awt.Font("Swis721 Cn BT", 1, 36)); // NOI18N
         revRegBtn.setForeground(new java.awt.Color(255, 255, 255));
-        revRegBtn.setText("Revisar Registros");
+        revRegBtn.setText("Revisar registros");
         revRegBtn.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(153, 153, 153), 2, true));
         revRegBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         revRegBtn.setFocusable(false);
