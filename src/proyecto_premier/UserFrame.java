@@ -10,6 +10,9 @@ public class UserFrame extends javax.swing.JFrame {
         setTitle("Proyecto Premier - Perfil");
         initComponents();
         userBtn.setIcon(setIcono("/img/userIconBlanco.png", userBtn));
+        setDefaultCloseOperation(UserFrame.HIDE_ON_CLOSE);
+        String usuario = Sesion.getUsuario();
+        userNameLabel.setText(usuario);
     }
 
     public Icon setIcono(String url, JButton boton) {
@@ -169,12 +172,12 @@ public class UserFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_userBtnActionPerformed
 
     private void logOutBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logOutBtnActionPerformed
-        this.setVisible(false);
-        new Login().setVisible(true);
+        System.exit(0);
     }//GEN-LAST:event_logOutBtnActionPerformed
 
     private void changeNameBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_changeNameBtnActionPerformed
         if(!"".equals(nameField.getText())) { 
+            Sesion.setUsuario(nameField.getText());
             userNameLabel.setText(nameField.getText());
             nameField.setText("");
         }
@@ -188,6 +191,8 @@ public class UserFrame extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
+
+        
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.

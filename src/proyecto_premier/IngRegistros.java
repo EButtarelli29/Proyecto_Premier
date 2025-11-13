@@ -9,8 +9,7 @@ public class IngRegistros extends javax.swing.JFrame {
     public IngRegistros() {
         setTitle("Proyecto Premier - Ingreso de registros");
         initComponents();
-        userBtn.setIcon(setIcono("/img/userIconBlanco.png", userBtn));
-        configBtn.setIcon(setIcono("/img/configIconBlanco.png", configBtn));
+        setLocationRelativeTo(null);
     }
 
     public Icon setIcono(String url, JButton boton) {
@@ -31,8 +30,6 @@ public class IngRegistros extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         Header = new javax.swing.JPanel();
         titleLabel = new javax.swing.JLabel();
-        configBtn = new javax.swing.JButton();
-        userBtn = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -53,26 +50,6 @@ public class IngRegistros extends javax.swing.JFrame {
             }
         });
 
-        configBtn.setBorderPainted(false);
-        configBtn.setContentAreaFilled(false);
-        configBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        configBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                configBtnActionPerformed(evt);
-            }
-        });
-
-        userBtn.setAlignmentY(0.0F);
-        userBtn.setBorderPainted(false);
-        userBtn.setContentAreaFilled(false);
-        userBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        userBtn.setIconTextGap(0);
-        userBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                userBtnActionPerformed(evt);
-            }
-        });
-
         jLabel2.setFont(new java.awt.Font("Segoe UI Light", 2, 24)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(204, 204, 204));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -83,22 +60,12 @@ public class IngRegistros extends javax.swing.JFrame {
         HeaderLayout.setHorizontalGroup(
             HeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(titleLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 747, Short.MAX_VALUE)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, HeaderLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(configBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(userBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
             .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         HeaderLayout.setVerticalGroup(
             HeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(HeaderLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(HeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(configBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(userBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(68, 68, 68)
                 .addComponent(titleLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel2)
@@ -123,17 +90,9 @@ public class IngRegistros extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void configBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_configBtnActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_configBtnActionPerformed
-
-    private void userBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_userBtnActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_userBtnActionPerformed
-
     private void titleLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_titleLabelMouseClicked
         this.setVisible(false);
-        new Interfaz().setVisible(true);
+        new MainUI().setVisible(true);
     }//GEN-LAST:event_titleLabelMouseClicked
 
     /**
@@ -173,10 +132,8 @@ public class IngRegistros extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Header;
-    private javax.swing.JButton configBtn;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel titleLabel;
-    private javax.swing.JButton userBtn;
     // End of variables declaration//GEN-END:variables
 }

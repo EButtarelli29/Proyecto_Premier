@@ -3,14 +3,15 @@ package proyecto_premier;
 import java.awt.Image;
 import javax.swing.*;
 
-public class Interfaz extends javax.swing.JFrame {
+public class MainUI extends javax.swing.JFrame {
 
 
-    public Interfaz() {
+    public MainUI() {
         setTitle("Proyecto Premier - Menú Principal");
         initComponents();
         userBtn.setIcon(setIcono("/img/userIconBlanco.png", userBtn));
         configBtn.setIcon(setIcono("/img/configIconBlanco.png", configBtn));
+        setLocationRelativeTo(null);
     }
     
 
@@ -209,7 +210,7 @@ public class Interfaz extends javax.swing.JFrame {
 
     private void titleLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_titleLabelMouseClicked
         this.setVisible(false);
-        new Interfaz().setVisible(true);
+        new MainUI().setVisible(true);
     }//GEN-LAST:event_titleLabelMouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

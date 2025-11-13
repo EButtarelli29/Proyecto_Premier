@@ -11,6 +11,8 @@ public class ConfigFrame extends javax.swing.JFrame {
     public ConfigFrame() {
         setTitle("Proyecto Premier - Configuración");
         initComponents();
+        setLocationRelativeTo(null);
+        setDefaultCloseOperation(ConfigFrame.HIDE_ON_CLOSE);
     }
 
     @SuppressWarnings("unchecked")
