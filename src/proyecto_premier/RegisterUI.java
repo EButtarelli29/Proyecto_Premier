@@ -14,7 +14,6 @@ public class RegisterUI extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
-        java.awt.GridBagConstraints gridBagConstraints;
 
         jPanel1 = new javax.swing.JPanel();
         Header = new javax.swing.JPanel();
@@ -100,7 +99,7 @@ public class RegisterUI extends javax.swing.JFrame {
         });
 
         loginLabel.setFont(new java.awt.Font("Segoe UI Semilight", 1, 18)); // NOI18N
-        loginLabel.setForeground(new java.awt.Color(0, 102, 255));
+        loginLabel.setForeground(new java.awt.Color(102, 102, 255));
         loginLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         loginLabel.setText("Volver al inicio de sesión");
         loginLabel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));

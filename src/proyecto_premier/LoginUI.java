@@ -1,6 +1,5 @@
 package proyecto_premier;
 
-import java.sql.Connection;
 import javax.swing.JOptionPane;
 
 public class LoginUI extends javax.swing.JFrame {
@@ -14,7 +13,6 @@ public class LoginUI extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
-        java.awt.GridBagConstraints gridBagConstraints;
 
         jPanel1 = new javax.swing.JPanel();
         Header = new javax.swing.JPanel();
@@ -25,9 +23,9 @@ public class LoginUI extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         campoUser = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        campoPass = new javax.swing.JTextField();
         loginBtn = new javax.swing.JButton();
         registerLabel = new javax.swing.JLabel();
+        campoPass = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -56,7 +54,7 @@ public class LoginUI extends javax.swing.JFrame {
         Header.setLayout(HeaderLayout);
         HeaderLayout.setHorizontalGroup(
             HeaderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(titleLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 590, Short.MAX_VALUE)
+            .addComponent(titleLabel, javax.swing.GroupLayout.DEFAULT_SIZE, 640, Short.MAX_VALUE)
             .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         HeaderLayout.setVerticalGroup(
@@ -83,8 +81,6 @@ public class LoginUI extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Segoe UI Semilight", 0, 18)); // NOI18N
         jLabel3.setText("Contraseña");
 
-        campoPass.setFont(new java.awt.Font("Segoe UI Semilight", 0, 18)); // NOI18N
-
         loginBtn.setBackground(new java.awt.Color(51, 204, 0));
         loginBtn.setFont(new java.awt.Font("Segoe UI Semilight", 1, 18)); // NOI18N
         loginBtn.setForeground(new java.awt.Color(255, 255, 255));
@@ -98,7 +94,7 @@ public class LoginUI extends javax.swing.JFrame {
         });
 
         registerLabel.setFont(new java.awt.Font("Segoe UI Semilight", 1, 18)); // NOI18N
-        registerLabel.setForeground(new java.awt.Color(0, 102, 255));
+        registerLabel.setForeground(new java.awt.Color(102, 102, 255));
         registerLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         registerLabel.setText("O intenta registrarte");
         registerLabel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -113,6 +109,11 @@ public class LoginUI extends javax.swing.JFrame {
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGap(151, 151, 151)
+                .addComponent(loginBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 152, Short.MAX_VALUE)
+                .addGap(164, 164, 164))
+            .addComponent(registerLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(44, 44, 44)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel4Layout.createSequentialGroup()
@@ -120,16 +121,11 @@ public class LoginUI extends javax.swing.JFrame {
                             .addComponent(jLabel1)
                             .addComponent(jLabel3))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanel4Layout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(campoPass, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(campoUser, javax.swing.GroupLayout.Alignment.LEADING))
+                            .addComponent(campoUser))
                         .addGap(47, 47, 47))))
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(151, 151, 151)
-                .addComponent(loginBtn, javax.swing.GroupLayout.DEFAULT_SIZE, 152, Short.MAX_VALUE)
-                .addGap(164, 164, 164))
-            .addComponent(registerLabel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -142,9 +138,9 @@ public class LoginUI extends javax.swing.JFrame {
                 .addComponent(jLabel3)
                 .addGap(18, 18, 18)
                 .addComponent(campoPass, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(37, 37, 37)
+                .addGap(55, 55, 55)
                 .addComponent(loginBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 117, Short.MAX_VALUE)
                 .addComponent(registerLabel)
                 .addGap(15, 15, 15))
         );
@@ -163,7 +159,7 @@ public class LoginUI extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(Header, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 549, Short.MAX_VALUE))
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 635, Short.MAX_VALUE))
         );
 
         getContentPane().add(jPanel1, java.awt.BorderLayout.CENTER);
@@ -175,17 +171,22 @@ public class LoginUI extends javax.swing.JFrame {
     }//GEN-LAST:event_titleLabelMouseClicked
 
     private void loginBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginBtnActionPerformed
-    String user = campoUser.getText();
-    String pass = campoPass.getText();
+        
+        String user = campoUser.getText();
+        char[] pass = campoPass.getPassword();
+        String passStr = new String(pass);
 
-    LoginCheck login = new LoginCheck();
-    if (login.autenticar(user, pass)) {
-        Sesion.setUsuario(user);
-        this.dispose();
-        new MainUI().setVisible(true);
-    } else {
-        JOptionPane.showMessageDialog(this, "Usuario o contraseña incorrectos");
-    }
+        String hash = HashUtil.sha256(passStr);
+
+        LoginCheck login = new LoginCheck();
+        if (login.autenticar(user, hash)) {
+            Sesion.setUsuario(user);
+            this.dispose();
+            new MainUI().setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(this, "Usuario o contraseña incorrectos");
+        }
+
     }//GEN-LAST:event_loginBtnActionPerformed
 
     private void registerLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_registerLabelMouseClicked
@@ -231,7 +232,7 @@ public class LoginUI extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Header;
-    private javax.swing.JTextField campoPass;
+    private javax.swing.JPasswordField campoPass;
     private javax.swing.JTextField campoUser;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

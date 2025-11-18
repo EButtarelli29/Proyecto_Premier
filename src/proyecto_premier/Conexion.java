@@ -15,11 +15,17 @@ public class Conexion {
     // Crea DB y tabla si no existen
     private void crearBaseYTabla() {
         String crearDB = "CREATE DATABASE IF NOT EXISTS PremierDataBase";
-        String crearTabla = "CREATE TABLE IF NOT EXISTS users (" +
+        String crearTablaUsers = "CREATE TABLE IF NOT EXISTS users (" +
                 "id INT PRIMARY KEY AUTO_INCREMENT, " +
                 "nombre VARCHAR(100), " +
-                "password VARCHAR(100), " + // más largo por si encriptás
+                "password VARCHAR(100), " + 
                 "email VARCHAR(100)" +
+                ")";
+        String crearTablaReg = "CREATE TABLE IF NOT EXISTS registros (" +
+                "id INT PRIMARY KEY AUTO_INCREMENT, " +
+                "fecha VARCHAR(100), " +
+                "cuenta VARCHAR(100), " + 
+                "monto INT(100)" +
                 ")";
         
         try {
@@ -35,7 +41,12 @@ public class Conexion {
             // Crear tabla
             try (Connection conexion = DriverManager.getConnection(URL_DB, USER, KEY);
                  Statement stmt = conexion.createStatement()) {
-                stmt.execute(crearTabla);
+                stmt.execute(crearTablaUsers);
+            }
+            
+            try (Connection conexion = DriverManager.getConnection(URL_DB, USER, KEY);
+                 Statement stmt = conexion.createStatement()) {
+                stmt.execute(crearTablaReg);
             }
 
             System.out.println("Base de datos y tabla listas.");

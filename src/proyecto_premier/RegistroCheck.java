@@ -4,8 +4,8 @@ import java.sql.*;
 public class RegistroCheck {
     
     public boolean registrar(String usuario, String password, String email) {
-        String checkSql = "SELECT * FROM users WHERE name = ?";
-        String insertSql = "INSERT INTO users (name, password, email) VALUES (?, ?, ?)";
+        String checkSql = "SELECT * FROM users WHERE nombre = ?";
+        String insertSql = "INSERT INTO users (nombre, password, email) VALUES (?, ?, ?)";
 
         try (Connection conn = Conexion.getConnection();
              PreparedStatement check = conn.prepareStatement(checkSql)) {
@@ -20,7 +20,8 @@ public class RegistroCheck {
 
             try (PreparedStatement insert = conn.prepareStatement(insertSql)) {
                 insert.setString(1, usuario);
-                insert.setString(2, password);
+                String hash = HashUtil.sha256(password);
+                insert.setString(2, hash);
                 insert.setString(3, email);
                 insert.executeUpdate();
                 System.out.println("Usuario registrado correctamente.");

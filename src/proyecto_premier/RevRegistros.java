@@ -3,15 +3,63 @@ package proyecto_premier;
 
 import java.awt.Image;
 import javax.swing.*;
+import java.sql.*;
+import javax.swing.table.DefaultTableModel;
 
 public class RevRegistros extends javax.swing.JFrame {
 
     public RevRegistros() {
         setTitle("Proyecto Premier - Historial de registros");
         initComponents();
+        cargarTabla();
         setLocationRelativeTo(null);
+        
     }
+    
+    public void cargarTabla() {
+        
+            
+            String sql = "SELECT * FROM registros";
+            Statement st;
+            ResultSet rs;
+            Conexion con = new Conexion();
+            Connection conexion = con.getConnection();
 
+            DefaultTableModel model = new DefaultTableModel();
+            
+            model.addColumn("ID");
+            model.addColumn("Fecha");
+            model.addColumn("Cuenta");
+            model.addColumn("Monto");
+
+            tablaRegistros.setModel(model);
+            
+            String [] datos = new String[4];
+            
+            try {
+                
+                st = conexion.createStatement();
+                
+                
+                
+                while(rs.next()) {
+                datos[0]=rs.getString(1);
+                datos[1]=rs.getString(2);
+                datos[2]=rs.getString(3);
+                datos[3]=rs.getString(4);
+                model.addRow(datos);
+            }
+            }
+            
+            
+            
+            
+        
+        
+        
+
+    }
+        
     public Icon setIcono(String url, JButton boton) {
         ImageIcon icon = new ImageIcon(getClass().getResource(url));
         
@@ -31,6 +79,9 @@ public class RevRegistros extends javax.swing.JFrame {
         Header = new javax.swing.JPanel();
         titleLabel = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tablaRegistros = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
@@ -73,17 +124,38 @@ public class RevRegistros extends javax.swing.JFrame {
                 .addContainerGap(37, Short.MAX_VALUE))
         );
 
+        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel2.setLayout(new java.awt.GridBagLayout());
+
+        tablaRegistros.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {},
+                {},
+                {},
+                {}
+            },
+            new String [] {
+
+            }
+        ));
+        tablaRegistros.setPreferredSize(new java.awt.Dimension(400, 400));
+        jScrollPane1.setViewportView(tablaRegistros);
+
+        jPanel2.add(jScrollPane1, new java.awt.GridBagConstraints());
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(Header, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(Header, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 635, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         getContentPane().add(jPanel1, java.awt.BorderLayout.CENTER);
@@ -96,9 +168,6 @@ public class RevRegistros extends javax.swing.JFrame {
         new MainUI().setVisible(true);
     }//GEN-LAST:event_titleLabelMouseClicked
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -135,6 +204,9 @@ public class RevRegistros extends javax.swing.JFrame {
     private javax.swing.JPanel Header;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JScrollPane jScrollPane1;
+    public javax.swing.JTable tablaRegistros;
     private javax.swing.JLabel titleLabel;
     // End of variables declaration//GEN-END:variables
 }
