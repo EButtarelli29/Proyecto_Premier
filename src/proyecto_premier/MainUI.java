@@ -3,17 +3,23 @@ package proyecto_premier;
 import java.awt.Image;
 import javax.swing.*;
 
-public class MainUI extends javax.swing.JFrame {
+public class MainUI extends javax.swing.JFrame implements ThemeInterface{
 
 
     public MainUI() {
         setTitle("Proyecto Premier - Menú Principal");
         initComponents();
+        aplicarTema();
         userBtn.setIcon(setIcono("/img/userIconBlanco.png", userBtn));
         configBtn.setIcon(setIcono("/img/configIconBlanco.png", configBtn));
         setLocationRelativeTo(null);
     }
     
+    @Override
+    public void aplicarTema() {
+        getContentPane().setBackground(Config.getBackgroundColor());
+        MainPanel.setBackground(Config.getBackgroundColor());
+    }
 
     public Icon setIcono(String url, JButton boton) {
         ImageIcon icon = new ImageIcon(getClass().getResource(url));
@@ -30,7 +36,7 @@ public class MainUI extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        Fondo = new javax.swing.JPanel();
+        MainPanel = new javax.swing.JPanel();
         Header = new javax.swing.JPanel();
         titleLabel = new javax.swing.JLabel();
         configBtn = new javax.swing.JButton();
@@ -43,7 +49,7 @@ public class MainUI extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        Fondo.setBackground(new java.awt.Color(255, 255, 255));
+        MainPanel.setBackground(new java.awt.Color(255, 255, 255));
 
         Header.setBackground(new java.awt.Color(102, 102, 255));
 
@@ -162,26 +168,26 @@ public class MainUI extends javax.swing.JFrame {
         jPanel1.add(exitBtn);
         exitBtn.setBounds(0, 300, 600, 100);
 
-        javax.swing.GroupLayout FondoLayout = new javax.swing.GroupLayout(Fondo);
-        Fondo.setLayout(FondoLayout);
-        FondoLayout.setHorizontalGroup(
-            FondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout MainPanelLayout = new javax.swing.GroupLayout(MainPanel);
+        MainPanel.setLayout(MainPanelLayout);
+        MainPanelLayout.setHorizontalGroup(
+            MainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(Header, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(FondoLayout.createSequentialGroup()
+            .addGroup(MainPanelLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 600, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        FondoLayout.setVerticalGroup(
-            FondoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(FondoLayout.createSequentialGroup()
+        MainPanelLayout.setVerticalGroup(
+            MainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(MainPanelLayout.createSequentialGroup()
                 .addComponent(Header, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(103, 103, 103)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 399, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(112, Short.MAX_VALUE))
         );
 
-        getContentPane().add(Fondo, java.awt.BorderLayout.CENTER);
+        getContentPane().add(MainPanel, java.awt.BorderLayout.CENTER);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -214,8 +220,8 @@ public class MainUI extends javax.swing.JFrame {
     }//GEN-LAST:event_titleLabelMouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel Fondo;
     private javax.swing.JPanel Header;
+    private javax.swing.JPanel MainPanel;
     private javax.swing.JButton configBtn;
     private javax.swing.JButton exitBtn;
     private javax.swing.JButton ingRegBtn;

@@ -6,5 +6,4 @@ public class Proyecto_Premier{
         Conexion conect = new Conexion();
         new LoginUI().setVisible(true);
     }
-         
 }

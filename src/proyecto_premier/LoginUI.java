@@ -180,7 +180,7 @@ public class LoginUI extends javax.swing.JFrame {
 
         LoginCheck login = new LoginCheck();
         if (login.autenticar(user, hash)) {
-            Sesion.setUsuario(user);
+            Config.setUsuario(user);
             this.dispose();
             new MainUI().setVisible(true);
         } else {

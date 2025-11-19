@@ -1,33 +1,42 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
+
 package proyecto_premier;
 
-import java.awt.Color;
-
-public class ConfigFrame extends javax.swing.JFrame {
+public class ConfigFrame extends javax.swing.JFrame implements ThemeInterface{
 
     public ConfigFrame() {
         setTitle("Proyecto Premier - Configuración");
         initComponents();
+        aplicarTema();
         setLocationRelativeTo(null);
         setDefaultCloseOperation(ConfigFrame.HIDE_ON_CLOSE);
     }
+    
+    @Override
+    public void aplicarTema() {
+        getContentPane().setBackground(Config.getBackgroundColor());
+        MainPanel.setBackground(Config.getBackgroundColor());
+        modoOscuroBtn.setBackground(Config.getBackgroundColor());
+        modoOscuroBtn.setForeground(Config.getContrastColor());
+        escBtn.setBackground(Config.getBackgroundColor());
+        escBtn.setForeground(Config.getContrastColor());
+    }
+
+
+    
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
+        MainPanel = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         configLabel = new javax.swing.JLabel();
         escBtn = new javax.swing.JButton();
-        darkModeBtn = new javax.swing.JToggleButton();
+        modoOscuroBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        MainPanel.setBackground(Config.getBackgroundColor());
 
         jPanel2.setBackground(new java.awt.Color(102, 102, 255));
 
@@ -57,59 +66,70 @@ public class ConfigFrame extends javax.swing.JFrame {
                     .addContainerGap(34, Short.MAX_VALUE)))
         );
 
+        escBtn.setFont(new java.awt.Font("Segoe UI Semilight", 1, 14)); // NOI18N
         escBtn.setText("Volver");
+        escBtn.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
+        escBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        escBtn.setFocusable(false);
         escBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 escBtnActionPerformed(evt);
             }
         });
 
-        darkModeBtn.setFont(new java.awt.Font("Swis721 Cn BT", 1, 18)); // NOI18N
-        darkModeBtn.setText("Modo oscuro");
-        darkModeBtn.addActionListener(new java.awt.event.ActionListener() {
+        modoOscuroBtn.setFont(new java.awt.Font("Segoe UI Semilight", 1, 18)); // NOI18N
+        modoOscuroBtn.setText("Modo Oscuro");
+        modoOscuroBtn.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
+        modoOscuroBtn.setFocusable(false);
+        modoOscuroBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                darkModeBtnActionPerformed(evt);
+                modoOscuroBtnActionPerformed(evt);
             }
         });
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout MainPanelLayout = new javax.swing.GroupLayout(MainPanel);
+        MainPanel.setLayout(MainPanelLayout);
+        MainPanelLayout.setHorizontalGroup(
+            MainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(168, 168, 168)
-                        .addComponent(escBtn))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(110, 110, 110)
-                        .addComponent(darkModeBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(118, Short.MAX_VALUE))
+            .addGroup(MainPanelLayout.createSequentialGroup()
+                .addGap(94, 94, 94)
+                .addComponent(modoOscuroBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(105, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, MainPanelLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(escBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(141, 141, 141))
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        MainPanelLayout.setVerticalGroup(
+            MainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(MainPanelLayout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(55, 55, 55)
-                .addComponent(darkModeBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 228, Short.MAX_VALUE)
-                .addComponent(escBtn)
-                .addGap(21, 21, 21))
+                .addGap(48, 48, 48)
+                .addComponent(modoOscuroBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 197, Short.MAX_VALUE)
+                .addComponent(escBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(22, 22, 22))
         );
 
-        getContentPane().add(jPanel1, java.awt.BorderLayout.CENTER);
+        getContentPane().add(MainPanel, java.awt.BorderLayout.CENTER);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void escBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_escBtnActionPerformed
-        this.setVisible(false);
+        this.dispose();
     }//GEN-LAST:event_escBtnActionPerformed
 
-    private void darkModeBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_darkModeBtnActionPerformed
-        jPanel1.setBackground(Color.BLACK);
-    }//GEN-LAST:event_darkModeBtnActionPerformed
+    private void modoOscuroBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modoOscuroBtnActionPerformed
+        Config.setColores();
+        
+        for (java.awt.Window w : java.awt.Window.getWindows()) {
+            if (w instanceof ThemeInterface themed) {
+                themed.aplicarTema();
+            }
+        }
+    }//GEN-LAST:event_modoOscuroBtnActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -145,10 +165,10 @@ public class ConfigFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel MainPanel;
     private javax.swing.JLabel configLabel;
-    private javax.swing.JToggleButton darkModeBtn;
     private javax.swing.JButton escBtn;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JButton modoOscuroBtn;
     // End of variables declaration//GEN-END:variables
 }

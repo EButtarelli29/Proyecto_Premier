@@ -209,7 +209,7 @@ public class RegisterUI extends javax.swing.JFrame {
     }//GEN-LAST:event_registerBtnActionPerformed
 
     private void loginLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_loginLabelMouseClicked
-        this.setVisible(false);
+        this.dispose();
         new LoginUI().setVisible(true);
     }//GEN-LAST:event_loginLabelMouseClicked
 
