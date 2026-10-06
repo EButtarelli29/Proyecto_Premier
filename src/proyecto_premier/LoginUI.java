@@ -3,10 +3,21 @@ package proyecto_premier;
 import javax.swing.JOptionPane;
 
 public class LoginUI extends javax.swing.JFrame {
-    
+
+    /** Instancia unica: el login no se duplica al ir y volver del registro. */
+    private static LoginUI instancia;
+
+    public static LoginUI obtener() {
+        if (instancia == null || !instancia.isDisplayable()) {
+            instancia = new LoginUI();
+        }
+        return instancia;
+    }
+
     public LoginUI() {
         setTitle("Proyecto Premier - Log-in");
         initComponents();
+        Tipografia.aplicar(this);
         setLocationRelativeTo(null);
     }
 
@@ -29,13 +40,13 @@ public class LoginUI extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setBackground(Paleta.BLANCO);
 
-        Header.setBackground(new java.awt.Color(102, 102, 255));
+        Header.setBackground(Paleta.AZUL_MARINO);
 
-        titleLabel.setBackground(new java.awt.Color(102, 0, 0));
+        titleLabel.setBackground(Paleta.AZUL_MARINO);
         titleLabel.setFont(new java.awt.Font("Swis721 BT", 1, 56)); // NOI18N
-        titleLabel.setForeground(new java.awt.Color(255, 255, 255));
+        titleLabel.setForeground(Paleta.BLANCO);
         titleLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         titleLabel.setText("Proyecto Premier");
         titleLabel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -46,7 +57,7 @@ public class LoginUI extends javax.swing.JFrame {
         });
 
         jLabel2.setFont(new java.awt.Font("Segoe UI Light", 2, 24)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(204, 204, 204));
+        jLabel2.setForeground(Paleta.TEXTO_HEADER);
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("Log-in");
 
@@ -67,10 +78,10 @@ public class LoginUI extends javax.swing.JFrame {
                 .addContainerGap(37, Short.MAX_VALUE))
         );
 
-        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel2.setBackground(Paleta.BLANCO);
         jPanel2.setLayout(new java.awt.GridBagLayout());
 
-        jPanel4.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel4.setBackground(Paleta.BLANCO);
         jPanel4.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         jLabel1.setFont(new java.awt.Font("Segoe UI Semilight", 0, 18)); // NOI18N
@@ -81,9 +92,9 @@ public class LoginUI extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Segoe UI Semilight", 0, 18)); // NOI18N
         jLabel3.setText("Contraseña");
 
-        loginBtn.setBackground(new java.awt.Color(51, 204, 0));
+        loginBtn.setBackground(Paleta.VERDE_OSCURO);
         loginBtn.setFont(new java.awt.Font("Segoe UI Semilight", 1, 18)); // NOI18N
-        loginBtn.setForeground(new java.awt.Color(255, 255, 255));
+        loginBtn.setForeground(Paleta.BLANCO);
         loginBtn.setText("Iniciar sesión");
         loginBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         loginBtn.setFocusable(false);
@@ -94,7 +105,7 @@ public class LoginUI extends javax.swing.JFrame {
         });
 
         registerLabel.setFont(new java.awt.Font("Segoe UI Semilight", 1, 18)); // NOI18N
-        registerLabel.setForeground(new java.awt.Color(102, 102, 255));
+        registerLabel.setForeground(Paleta.AZUL_ACERO);
         registerLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         registerLabel.setText("O intenta registrarte");
         registerLabel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -171,18 +182,27 @@ public class LoginUI extends javax.swing.JFrame {
     }//GEN-LAST:event_titleLabelMouseClicked
 
     private void loginBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginBtnActionPerformed
-        
-        String user = campoUser.getText();
+
+        String user = campoUser.getText().trim();
         char[] pass = campoPass.getPassword();
         String passStr = new String(pass);
 
-        String hash = HashUtil.sha256(passStr);
+        if (!Validaciones.validarUsuario(user)) {
+            JOptionPane.showMessageDialog(this, Validaciones.getMensajeUsuario(),
+                    "Error de validación", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        if (passStr.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "La contraseña no puede estar vacía.",
+                    "Error de validación", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
 
         LoginCheck login = new LoginCheck();
-        if (login.autenticar(user, hash)) {
+        if (login.autenticar(user, passStr)) {
             Config.setUsuario(user);
             this.dispose();
-            new MainUI().setVisible(true);
+            MainUI.obtener().setVisible(true);
         } else {
             JOptionPane.showMessageDialog(this, "Usuario o contraseña incorrectos");
         }
@@ -193,7 +213,6 @@ public class LoginUI extends javax.swing.JFrame {
         this.setVisible(false);
         new RegisterUI().setVisible(true);
     }//GEN-LAST:event_registerLabelMouseClicked
-
     /**
      * @param args the command line arguments
      */

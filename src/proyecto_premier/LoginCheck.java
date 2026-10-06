@@ -3,17 +3,20 @@ import java.sql.*;
 
 public class LoginCheck {
     
-    public boolean autenticar(String usuario, String hashPassword) {
-        String sql = "SELECT * FROM users WHERE nombre = ? AND password = ?";
+    public boolean autenticar(String usuario, String password) {
+        String sql = "SELECT password FROM users WHERE nombre = ?";
         try (Connection conn = Conexion.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
             
             ps.setString(1, usuario);
-            ps.setString(2, hashPassword);
+            ResultSet rs = ps.executeQuery();
 
-           ResultSet rs = ps.executeQuery();
-
-            return rs.next();
+            if (rs.next()) {
+                String hashAlmacenado = rs.getString("password");
+                return HashUtil.verifyPassword(password, hashAlmacenado);
+            }
+            
+            return false;
             
         } catch (SQLException e) {
             e.printStackTrace();

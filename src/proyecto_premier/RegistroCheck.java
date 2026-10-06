@@ -20,7 +20,7 @@ public class RegistroCheck {
 
             try (PreparedStatement insert = conn.prepareStatement(insertSql)) {
                 insert.setString(1, usuario);
-                String hash = HashUtil.sha256(password);
+                String hash = HashUtil.hashPassword(password);
                 insert.setString(2, hash);
                 insert.setString(3, email);
                 insert.executeUpdate();

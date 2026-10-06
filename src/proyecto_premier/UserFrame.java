@@ -1,42 +1,43 @@
 
 package proyecto_premier;
 
-import java.awt.Image;
 import javax.swing.*;
 
 public class UserFrame extends javax.swing.JFrame implements ThemeInterface{
 
+    /** Instancia unica: el perfil se abre sobre el menu, sin ocultarlo. */
+    private static UserFrame instancia;
+
+    public static UserFrame obtener() {
+        if (instancia == null || !instancia.isDisplayable()) {
+            instancia = new UserFrame();
+        }
+        return instancia;
+    }
+
     public UserFrame() {
         setTitle("Proyecto Premier - Perfil");
         initComponents();
+        Tipografia.aplicar(this);
         aplicarTema();
-        userBtn.setIcon(setIcono("/img/userIconBlanco.png", userBtn));
-        setDefaultCloseOperation(UserFrame.HIDE_ON_CLOSE);
+        userBtn.setIcon(Iconos.cargar("/img/userIconBlanco.png", 150, 150));
         String usuario = Config.getUsuario();
         userNameLabel.setText(usuario);
         setLocationRelativeTo(null);
     }
-    
+
     @Override
     public void aplicarTema() {
         getContentPane().setBackground(Config.getBackgroundColor());
         MainPanel.setBackground(Config.getBackgroundColor());
-        nameField.setBackground(Config.getBackgroundColor());
-        nameField.setForeground(Config.getBackgroundColor());
-        notaLabel.setForeground(Config.getContrastColor());
-        escBtn.setBackground(Config.getBackgroundColor());
+        nameField.setBackground(Config.getPanelColor());
+        nameField.setForeground(Config.getContrastColor());
+        nameField.setCaretColor(Config.getContrastColor());
+        nameField.setBorder(javax.swing.BorderFactory.createLineBorder(Config.getBorderColor()));
+        notaLabel.setForeground(Config.getSecondaryTextColor());
+        escBtn.setBackground(Config.getPanelColor());
         escBtn.setForeground(Config.getContrastColor());
-    }
-    
-    public Icon setIcono(String url, JButton boton) {
-        ImageIcon icon = new ImageIcon(getClass().getResource(url));
-        
-        int ancho = boton.getWidth();
-        int alto = boton.getHeight();
-        
-        ImageIcon icono = new ImageIcon(icon.getImage().getScaledInstance(ancho, alto, Image.SCALE_DEFAULT));
-        
-        return icono;
+        escBtn.setBorder(javax.swing.BorderFactory.createLineBorder(Config.getBorderColor()));
     }
     
     @SuppressWarnings("unchecked")
@@ -54,11 +55,11 @@ public class UserFrame extends javax.swing.JFrame implements ThemeInterface{
         escBtn = new javax.swing.JButton();
         notaLabel = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        MainPanel.setBackground(new java.awt.Color(255, 255, 255));
+        MainPanel.setBackground(Paleta.BLANCO);
 
-        jPanel2.setBackground(new java.awt.Color(102, 102, 255));
+        jPanel2.setBackground(Paleta.AZUL_MARINO);
 
         userBtn.setAlignmentY(0.0F);
         userBtn.setBorderPainted(false);
@@ -72,7 +73,7 @@ public class UserFrame extends javax.swing.JFrame implements ThemeInterface{
         });
 
         userNameLabel.setFont(new java.awt.Font("Segoe UI Semilight", 0, 14)); // NOI18N
-        userNameLabel.setForeground(new java.awt.Color(255, 255, 255));
+        userNameLabel.setForeground(Paleta.BLANCO);
         userNameLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         userNameLabel.setText("username");
 
@@ -96,11 +97,11 @@ public class UserFrame extends javax.swing.JFrame implements ThemeInterface{
                 .addContainerGap(10, Short.MAX_VALUE))
         );
 
-        logOutBtn.setBackground(new java.awt.Color(255, 0, 0));
+        logOutBtn.setBackground(Paleta.ROJO_OSCURO);
         logOutBtn.setFont(new java.awt.Font("Swis721 Cn BT", 1, 18)); // NOI18N
-        logOutBtn.setForeground(new java.awt.Color(255, 255, 255));
+        logOutBtn.setForeground(Paleta.BLANCO);
         logOutBtn.setText("Cerrar sesión");
-        logOutBtn.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(153, 153, 153), 2, true));
+        logOutBtn.setBorder(new javax.swing.border.LineBorder(Paleta.BORDE, 2, true));
         logOutBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         logOutBtn.setFocusable(false);
         logOutBtn.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -112,11 +113,11 @@ public class UserFrame extends javax.swing.JFrame implements ThemeInterface{
             }
         });
 
-        changeNameBtn.setBackground(new java.awt.Color(102, 102, 255));
+        changeNameBtn.setBackground(Paleta.AZUL_ACERO);
         changeNameBtn.setFont(new java.awt.Font("Swis721 Cn BT", 1, 18)); // NOI18N
-        changeNameBtn.setForeground(new java.awt.Color(255, 255, 255));
+        changeNameBtn.setForeground(Paleta.BLANCO);
         changeNameBtn.setText("Cambiar nombre");
-        changeNameBtn.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(153, 153, 153), 2, true));
+        changeNameBtn.setBorder(new javax.swing.border.LineBorder(Paleta.BORDE, 2, true));
         changeNameBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         changeNameBtn.setFocusable(false);
         changeNameBtn.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -134,12 +135,12 @@ public class UserFrame extends javax.swing.JFrame implements ThemeInterface{
         nameField.setRows(1);
         nameField.setAlignmentX(1.0F);
         nameField.setAlignmentY(1.0F);
-        nameField.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
+        nameField.setBorder(javax.swing.BorderFactory.createLineBorder(Paleta.BORDE));
         jScrollPane1.setViewportView(nameField);
 
         escBtn.setFont(new java.awt.Font("Segoe UI Semilight", 1, 14)); // NOI18N
         escBtn.setText("Volver");
-        escBtn.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
+        escBtn.setBorder(javax.swing.BorderFactory.createLineBorder(Paleta.BORDE));
         escBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         escBtn.setFocusable(false);
         escBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -200,7 +201,12 @@ public class UserFrame extends javax.swing.JFrame implements ThemeInterface{
 
     private void logOutBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logOutBtnActionPerformed
         this.dispose();
-        new LoginUI().setVisible(true);
+        // El menu queda abierto detras del perfil, asi que cerrar sesion
+        // tambien tiene que cerrarlo: si no se follow usando la aplicacion
+        // sin autenticarse.
+        MainUI.cerrar();
+        Config.setUsuario(null);
+        LoginUI.obtener().setVisible(true);
     }//GEN-LAST:event_logOutBtnActionPerformed
 
     private void changeNameBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_changeNameBtnActionPerformed

@@ -1,30 +1,59 @@
 
 package proyecto_premier;
 
-import java.awt.Image;
 import javax.swing.*;
+import java.math.BigDecimal;
 import java.sql.*;
+import java.text.NumberFormat;
 import javax.swing.table.DefaultTableModel;
 
 public class RevRegistros extends javax.swing.JFrame implements ThemeInterface{
 
+    /** Instancia unica: evita apilar ventanas de historial. */
+    private static RevRegistros instancia;
+
+    public static RevRegistros obtener() {
+        if (instancia == null || !instancia.isDisplayable()) {
+            instancia = new RevRegistros();
+        }
+        return instancia;
+    }
+
     public RevRegistros() {
         setTitle("Proyecto Premier - Historial de registros");
         initComponents();
+        Tipografia.aplicar(this);
         aplicarTema();
         cargarTabla();
         setLocationRelativeTo(null);
-        
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosed(java.awt.event.WindowEvent e) {
+                MainUI.obtener().setVisible(true);
+            }
+        });
     }
-    
+
+    /** Cierra esta ventana y muestra el menu. */
+    private void volverAlMenu() {
+        this.dispose();
+        MainUI.obtener().setVisible(true);
+    }
+
     @Override
     public void aplicarTema() {
         getContentPane().setBackground(Config.getBackgroundColor());
         MainPanel.setBackground(Config.getBackgroundColor());
-        tablaRegistros.setBackground(Config.getBackgroundColor());
+        tablaRegistros.setBackground(Config.getPanelColor());
         tablaRegistros.setForeground(Config.getContrastColor());
+        tablaRegistros.setGridColor(Config.getGridColor());
+        tablaRegistros.setBorder(javax.swing.BorderFactory.createLineBorder(Config.getBorderColor()));
+        tablaRegistros.getTableHeader().setBackground(Paleta.AZUL_MARINO);
+        tablaRegistros.getTableHeader().setForeground(Paleta.BLANCO);
+        tablaRegistros.setSelectionBackground(Paleta.AZUL_MARINO);
+        tablaRegistros.setSelectionForeground(Paleta.BLANCO);
         panelTabla.setBackground(Config.getBackgroundColor());
-        scroll.getViewport().setBackground(Config.getBackgroundColor());
+        scroll.getViewport().setBackground(Config.getPanelColor());
     }
     
     public void cargarTabla() {
@@ -33,18 +62,25 @@ public class RevRegistros extends javax.swing.JFrame implements ThemeInterface{
 
     tablaRegistros.setModel(model);
 
-    String sql = "SELECT id, fecha, cuenta, monto FROM registros";
+    // getConnection() es estatico. Con new Conexion() se ejecutaba de nuevo
+    // todo el DDL de preparacion del esquema en cada carga de la tabla.
+    String sql = "SELECT id, fecha, cuenta, monto FROM registros ORDER BY id DESC";
 
-    try (Connection conexion = new Conexion().getConnection();
-         Statement st = conexion.createStatement();
-         ResultSet rs = st.executeQuery(sql)) {
+    try (Connection conexion = Conexion.getConnection();
+         PreparedStatement st = conexion.prepareStatement(sql);
+         ResultSet rs = st.executeQuery()) {
 
+        // Formato argentino: 1.234,56
+        NumberFormat formato = NumberFormat.getInstance(java.util.Locale.of("es", "AR"));
         while (rs.next()) {
             Object[] fila = new Object[4];
             fila[0] = rs.getInt("id");
             fila[1] = rs.getString("fecha");
             fila[2] = rs.getString("cuenta");
-            fila[3] = rs.getInt("monto");
+            // BigDecimal y no getInt: getInt trunca y ademas el monto ya es
+            // DECIMAL(12,2), asi que 100.75 se perdia.
+            BigDecimal monto = rs.getBigDecimal("monto");
+            fila[3] = monto == null ? "" : formato.format(monto);
 
             model.addRow(fila);
         }
@@ -59,16 +95,6 @@ public class RevRegistros extends javax.swing.JFrame implements ThemeInterface{
 }
 
         
-    public Icon setIcono(String url, JButton boton) {
-        ImageIcon icon = new ImageIcon(getClass().getResource(url));
-        
-        int ancho = boton.getWidth();
-        int alto = boton.getHeight();
-        
-        ImageIcon icono = new ImageIcon(icon.getImage().getScaledInstance(ancho, alto, Image.SCALE_DEFAULT));
-        
-        return icono;
-    }
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -83,16 +109,16 @@ public class RevRegistros extends javax.swing.JFrame implements ThemeInterface{
         scroll = new javax.swing.JScrollPane();
         tablaRegistros = new javax.swing.JTable();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setBackground(new java.awt.Color(255, 255, 255));
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setBackground(Paleta.BLANCO);
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setBackground(Paleta.BLANCO);
 
-        Header.setBackground(new java.awt.Color(102, 102, 255));
+        Header.setBackground(Paleta.AZUL_MARINO);
 
-        titleLabel.setBackground(new java.awt.Color(102, 0, 0));
+        titleLabel.setBackground(Paleta.AZUL_MARINO);
         titleLabel.setFont(new java.awt.Font("Swis721 BT", 1, 56)); // NOI18N
-        titleLabel.setForeground(new java.awt.Color(255, 255, 255));
+        titleLabel.setForeground(Paleta.BLANCO);
         titleLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         titleLabel.setText("Proyecto Premier");
         titleLabel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -103,7 +129,7 @@ public class RevRegistros extends javax.swing.JFrame implements ThemeInterface{
         });
 
         jLabel2.setFont(new java.awt.Font("Segoe UI Light", 2, 24)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(204, 204, 204));
+        jLabel2.setForeground(Paleta.TEXTO_HEADER);
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("Historial de registros");
 
@@ -124,10 +150,10 @@ public class RevRegistros extends javax.swing.JFrame implements ThemeInterface{
                 .addContainerGap(37, Short.MAX_VALUE))
         );
 
-        MainPanel.setBackground(new java.awt.Color(255, 255, 255));
+        MainPanel.setBackground(Paleta.BLANCO);
         MainPanel.setLayout(new java.awt.GridBagLayout());
 
-        tablaRegistros.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
+        tablaRegistros.setBorder(javax.swing.BorderFactory.createLineBorder(Paleta.BORDE));
         tablaRegistros.setFont(new java.awt.Font("Segoe UI Semilight", 0, 14)); // NOI18N
         tablaRegistros.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -139,7 +165,7 @@ public class RevRegistros extends javax.swing.JFrame implements ThemeInterface{
         ));
         tablaRegistros.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         tablaRegistros.setFocusable(false);
-        tablaRegistros.setGridColor(new java.awt.Color(120, 120, 255));
+        tablaRegistros.setGridColor(Paleta.GRIS_CLARO);
         tablaRegistros.setIntercellSpacing(new java.awt.Dimension(5, 5));
         tablaRegistros.setRowHeight(35);
         tablaRegistros.setRowSelectionAllowed(false);
@@ -184,8 +210,7 @@ public class RevRegistros extends javax.swing.JFrame implements ThemeInterface{
     }// </editor-fold>//GEN-END:initComponents
 
     private void titleLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_titleLabelMouseClicked
-        this.dispose();
-        new MainUI().setVisible(true);
+        volverAlMenu();
     }//GEN-LAST:event_titleLabelMouseClicked
 
     public static void main(String args[]) {

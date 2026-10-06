@@ -1,0 +1,23 @@
+# Salida de compilacion de NetBeans / javac
+build/
+nbproject/private/
+dist/
+
+# Clases compiladas sueltas
+*.class
+
+# Dependencias descargadas manualmente (el driver de MySQL trae su propio
+# arbol de fuentes). Ver README.md para como obtenerlas.
+sqlConnector/
+
+# Archivos del sistema operativo y del editor
+.DS_Store
+Thumbs.db
+*.swp
+.idea/
+*.iml
+.vscode/
+
+# Logs y archivos temporales
+*.log
+*.tmp

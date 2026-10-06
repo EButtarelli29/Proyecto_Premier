@@ -3,22 +3,34 @@ package proyecto_premier;
 
 public class ConfigFrame extends javax.swing.JFrame implements ThemeInterface{
 
+    /** Instancia unica: la configuracion se abre sobre el menu. */
+    private static ConfigFrame instancia;
+
+    public static ConfigFrame obtener() {
+        if (instancia == null || !instancia.isDisplayable()) {
+            instancia = new ConfigFrame();
+        }
+        return instancia;
+    }
+
     public ConfigFrame() {
         setTitle("Proyecto Premier - Configuración");
         initComponents();
+        Tipografia.aplicar(this);
         aplicarTema();
         setLocationRelativeTo(null);
-        setDefaultCloseOperation(ConfigFrame.HIDE_ON_CLOSE);
     }
-    
+
     @Override
     public void aplicarTema() {
         getContentPane().setBackground(Config.getBackgroundColor());
         MainPanel.setBackground(Config.getBackgroundColor());
-        modoOscuroBtn.setBackground(Config.getBackgroundColor());
+        modoOscuroBtn.setBackground(Config.getPanelColor());
         modoOscuroBtn.setForeground(Config.getContrastColor());
-        escBtn.setBackground(Config.getBackgroundColor());
+        modoOscuroBtn.setBorder(javax.swing.BorderFactory.createLineBorder(Config.getBorderColor()));
+        escBtn.setBackground(Config.getPanelColor());
         escBtn.setForeground(Config.getContrastColor());
+        escBtn.setBorder(javax.swing.BorderFactory.createLineBorder(Config.getBorderColor()));
     }
 
 
@@ -34,14 +46,14 @@ public class ConfigFrame extends javax.swing.JFrame implements ThemeInterface{
         escBtn = new javax.swing.JButton();
         modoOscuroBtn = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         MainPanel.setBackground(Config.getBackgroundColor());
 
-        jPanel2.setBackground(new java.awt.Color(102, 102, 255));
+        jPanel2.setBackground(Paleta.AZUL_MARINO);
 
         configLabel.setFont(new java.awt.Font("Segoe UI Light", 2, 24)); // NOI18N
-        configLabel.setForeground(new java.awt.Color(204, 204, 204));
+        configLabel.setForeground(Paleta.TEXTO_HEADER);
         configLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         configLabel.setText("Configuración");
 
@@ -68,7 +80,7 @@ public class ConfigFrame extends javax.swing.JFrame implements ThemeInterface{
 
         escBtn.setFont(new java.awt.Font("Segoe UI Semilight", 1, 14)); // NOI18N
         escBtn.setText("Volver");
-        escBtn.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
+        escBtn.setBorder(javax.swing.BorderFactory.createLineBorder(Paleta.BORDE));
         escBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         escBtn.setFocusable(false);
         escBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -79,7 +91,7 @@ public class ConfigFrame extends javax.swing.JFrame implements ThemeInterface{
 
         modoOscuroBtn.setFont(new java.awt.Font("Segoe UI Semilight", 1, 18)); // NOI18N
         modoOscuroBtn.setText("Modo Oscuro");
-        modoOscuroBtn.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
+        modoOscuroBtn.setBorder(javax.swing.BorderFactory.createLineBorder(Paleta.BORDE));
         modoOscuroBtn.setFocusable(false);
         modoOscuroBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

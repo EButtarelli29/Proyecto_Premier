@@ -1,17 +1,50 @@
 
 package proyecto_premier;
-import java.awt.Image;
 import javax.swing.*;
 
 public class MainUI extends javax.swing.JFrame implements ThemeInterface{
 
+    /**
+     * Unica instancia del menu.
+     *
+     * Antes cada ventana hacia new MainUI() al volver, y como las ventanas
+     * anteriores solo se ocultaban con setVisible(false) en vez de liberarse
+     * con dispose(), cada ida y vuelta al menu dejaba una ventana vieja
+     * registrada en AWT. Medido: 8 ida y vuelta acumulaban 15 ventanas con
+     * una sola visible. Con una instancia reutilizada la cantidad queda
+     * acotada a una.
+     */
+    private static MainUI instancia;
+
+    /**
+     * Devuelve el menu, creandolo solo si hace falta.
+     * Reutilizar la misma instancia es lo que evita la fuga de ventanas.
+     */
+    public static MainUI obtener() {
+        if (instancia == null || !instancia.isDisplayable()) {
+            instancia = new MainUI();
+        }
+        return instancia;
+    }
+
+    /**
+     * Cierra el menu si esta abierto. Se usa al cerrar sesion: antes el menu
+     * quedaba visible detras del login y se podia seguir usando la aplicacion
+     * sin haber vuelto a autenticarse.
+     */
+    public static void cerrar() {
+        if (instancia != null && instancia.isDisplayable()) {
+            instancia.dispose();
+        }
+    }
 
     public MainUI() {
         setTitle("Proyecto Premier - Menú Principal");
         initComponents();
+        Tipografia.aplicar(this);
         aplicarTema();
-        userBtn.setIcon(setIcono("/img/userIconBlanco.png", userBtn));
-        configBtn.setIcon(setIcono("/img/configIconBlanco.png", configBtn));
+        userBtn.setIcon(Iconos.cargar("/img/userIconBlanco.png", 50, 50));
+        configBtn.setIcon(Iconos.cargar("/img/configIconBlanco.png", 50, 50));
         setLocationRelativeTo(null);
     }
     
@@ -21,17 +54,6 @@ public class MainUI extends javax.swing.JFrame implements ThemeInterface{
         MainPanel.setBackground(Config.getBackgroundColor());
     }
 
-    public Icon setIcono(String url, JButton boton) {
-        ImageIcon icon = new ImageIcon(getClass().getResource(url));
-        
-        int ancho = boton.getWidth();
-        int alto = boton.getHeight();
-        
-        ImageIcon icono = new ImageIcon(icon.getImage().getScaledInstance(ancho, alto, Image.SCALE_DEFAULT));
-        
-        return icono;
-    }
-    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -49,13 +71,13 @@ public class MainUI extends javax.swing.JFrame implements ThemeInterface{
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        MainPanel.setBackground(new java.awt.Color(255, 255, 255));
+        MainPanel.setBackground(Paleta.BLANCO);
 
-        Header.setBackground(new java.awt.Color(102, 102, 255));
+        Header.setBackground(Paleta.AZUL_MARINO);
 
-        titleLabel.setBackground(new java.awt.Color(102, 0, 0));
+        titleLabel.setBackground(Paleta.AZUL_MARINO);
         titleLabel.setFont(new java.awt.Font("Swis721 BT", 1, 56)); // NOI18N
-        titleLabel.setForeground(new java.awt.Color(255, 255, 255));
+        titleLabel.setForeground(Paleta.BLANCO);
         titleLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         titleLabel.setText("Proyecto Premier");
         titleLabel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -86,7 +108,7 @@ public class MainUI extends javax.swing.JFrame implements ThemeInterface{
         });
 
         jLabel2.setFont(new java.awt.Font("Segoe UI Light", 2, 24)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(204, 204, 204));
+        jLabel2.setForeground(Paleta.TEXTO_HEADER);
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("Menú principal");
 
@@ -120,11 +142,11 @@ public class MainUI extends javax.swing.JFrame implements ThemeInterface{
         jPanel1.setOpaque(false);
         jPanel1.setLayout(null);
 
-        ingRegBtn.setBackground(new java.awt.Color(102, 102, 255));
-        ingRegBtn.setFont(new java.awt.Font("Swis721 Cn BT", 1, 36)); // NOI18N
-        ingRegBtn.setForeground(new java.awt.Color(255, 255, 255));
+        ingRegBtn.setBackground(Paleta.AZUL_ACERO);
+        ingRegBtn.setFont(new java.awt.Font("Swis721 Cn BT", 1, 24)); // NOI18N
+        ingRegBtn.setForeground(Paleta.BLANCO);
         ingRegBtn.setText("Ingresar registros");
-        ingRegBtn.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(153, 153, 153), 2, true));
+        ingRegBtn.setBorder(new javax.swing.border.LineBorder(Paleta.BORDE, 2, true));
         ingRegBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         ingRegBtn.setFocusable(false);
         ingRegBtn.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -136,13 +158,13 @@ public class MainUI extends javax.swing.JFrame implements ThemeInterface{
             }
         });
         jPanel1.add(ingRegBtn);
-        ingRegBtn.setBounds(0, 0, 600, 100);
+        ingRegBtn.setBounds(100, 0, 400, 64);
 
-        revRegBtn.setBackground(new java.awt.Color(102, 102, 255));
-        revRegBtn.setFont(new java.awt.Font("Swis721 Cn BT", 1, 36)); // NOI18N
-        revRegBtn.setForeground(new java.awt.Color(255, 255, 255));
+        revRegBtn.setBackground(Paleta.AZUL_ACERO);
+        revRegBtn.setFont(new java.awt.Font("Swis721 Cn BT", 1, 24)); // NOI18N
+        revRegBtn.setForeground(Paleta.BLANCO);
         revRegBtn.setText("Revisar registros");
-        revRegBtn.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(153, 153, 153), 2, true));
+        revRegBtn.setBorder(new javax.swing.border.LineBorder(Paleta.BORDE, 2, true));
         revRegBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         revRegBtn.setFocusable(false);
         revRegBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -151,13 +173,13 @@ public class MainUI extends javax.swing.JFrame implements ThemeInterface{
             }
         });
         jPanel1.add(revRegBtn);
-        revRegBtn.setBounds(0, 150, 600, 100);
+        revRegBtn.setBounds(100, 88, 400, 64);
 
-        exitBtn.setBackground(new java.awt.Color(255, 0, 0));
-        exitBtn.setFont(new java.awt.Font("Swis721 Cn BT", 1, 36)); // NOI18N
-        exitBtn.setForeground(new java.awt.Color(255, 255, 255));
+        exitBtn.setBackground(Paleta.ROJO_OSCURO);
+        exitBtn.setFont(new java.awt.Font("Swis721 Cn BT", 1, 24)); // NOI18N
+        exitBtn.setForeground(Paleta.BLANCO);
         exitBtn.setText("Salir");
-        exitBtn.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(153, 153, 153), 2, true));
+        exitBtn.setBorder(new javax.swing.border.LineBorder(Paleta.BORDE, 2, true));
         exitBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         exitBtn.setFocusable(false);
         exitBtn.addActionListener(new java.awt.event.ActionListener() {
@@ -166,7 +188,7 @@ public class MainUI extends javax.swing.JFrame implements ThemeInterface{
             }
         });
         jPanel1.add(exitBtn);
-        exitBtn.setBounds(0, 300, 600, 100);
+        exitBtn.setBounds(100, 176, 400, 64);
 
         javax.swing.GroupLayout MainPanelLayout = new javax.swing.GroupLayout(MainPanel);
         MainPanel.setLayout(MainPanelLayout);
@@ -183,7 +205,7 @@ public class MainUI extends javax.swing.JFrame implements ThemeInterface{
             .addGroup(MainPanelLayout.createSequentialGroup()
                 .addComponent(Header, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(103, 103, 103)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 399, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(112, Short.MAX_VALUE))
         );
 
@@ -193,21 +215,22 @@ public class MainUI extends javax.swing.JFrame implements ThemeInterface{
     }// </editor-fold>//GEN-END:initComponents
 
     private void configBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_configBtnActionPerformed
-        new ConfigFrame().setVisible(true);
+        ConfigFrame.obtener().setVisible(true);
     }//GEN-LAST:event_configBtnActionPerformed
 
     private void userBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_userBtnActionPerformed
-        new UserFrame().setVisible(true);
+        // obtener() en vez de new: antes cada clic abria otra ventana de perfil.
+        UserFrame.obtener().setVisible(true);
     }//GEN-LAST:event_userBtnActionPerformed
 
     private void ingRegBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ingRegBtnActionPerformed
         this.setVisible(false);
-        new IngRegistros().setVisible(true);
+        IngRegistros.obtener().setVisible(true);
     }//GEN-LAST:event_ingRegBtnActionPerformed
 
     private void revRegBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_revRegBtnActionPerformed
         this.setVisible(false);
-        new RevRegistros().setVisible(true);
+        RevRegistros.obtener().setVisible(true);
     }//GEN-LAST:event_revRegBtnActionPerformed
 
     private void exitBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exitBtnActionPerformed
@@ -215,8 +238,9 @@ public class MainUI extends javax.swing.JFrame implements ThemeInterface{
     }//GEN-LAST:event_exitBtnActionPerformed
 
     private void titleLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_titleLabelMouseClicked
-        this.setVisible(false);
-        new MainUI().setVisible(true);
+        // Antes creaba otro MainUI, con lo cual se podian apilar menus
+        // identicos. Ahora solo se trae al frente el que ya existe.
+        this.toFront();
     }//GEN-LAST:event_titleLabelMouseClicked
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -1,53 +1,70 @@
 
 package proyecto_premier;
 
-import java.awt.Image;
-import java.sql.Date;
-import java.text.SimpleDateFormat;
+import java.math.BigDecimal;
 
 import javax.swing.*;
 
 public class IngRegistros extends javax.swing.JFrame implements ThemeInterface{
 
+    /** Instancia unica: evita apilar ventanas de ingreso. */
+    private static IngRegistros instancia;
+
+    public static IngRegistros obtener() {
+        if (instancia == null || !instancia.isDisplayable()) {
+            instancia = new IngRegistros();
+        }
+        return instancia;
+    }
+
     public IngRegistros() {
         setTitle("Proyecto Premier - Ingreso de registros");
         initComponents();
+        Tipografia.aplicar(this);
         aplicarTema();
         setLocationRelativeTo(null);
+        // Volver al menu tambien al cerrar con la X: si no, se ocultaba el
+        // menu y esta ventana se liberaba, dejando la app sin ventanas
+        // visibles y la JVM terminaba sola.
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosed(java.awt.event.WindowEvent e) {
+                MainUI.obtener().setVisible(true);
+            }
+        });
     }
-    
+
+    /** Cierra esta ventana y muestra el menu. */
+    private void volverAlMenu() {
+        this.dispose();
+        MainUI.obtener().setVisible(true);
+    }
+
     @Override
     public void aplicarTema() {
         getContentPane().setBackground(Config.getBackgroundColor());
         MainPanel.setBackground(Config.getBackgroundColor());
-        panelForm.setBackground(Config.getBackgroundColor());
-        campoFecha.setBackground(Config.getBackgroundColor());
-        campoCuenta.setBackground(Config.getBackgroundColor());
-        campoMonto.setBackground(Config.getBackgroundColor());
+        panelForm.setBackground(Config.getPanelColor());
+        panelForm.setBorder(javax.swing.BorderFactory.createLineBorder(Config.getBorderColor()));
+        campoFecha.setBackground(Config.getPanelColor());
+        campoCuenta.setBackground(Config.getPanelColor());
+        campoMonto.setBackground(Config.getPanelColor());
         campoFecha.setForeground(Config.getContrastColor());
         campoCuenta.setForeground(Config.getContrastColor());
         campoMonto.setForeground(Config.getContrastColor());
         campoFecha.setCaretColor(Config.getContrastColor());
         campoCuenta.setCaretColor(Config.getContrastColor());
         campoMonto.setCaretColor(Config.getContrastColor());
+        campoFecha.setBorder(javax.swing.BorderFactory.createLineBorder(Config.getBorderColor()));
+        campoCuenta.setBorder(javax.swing.BorderFactory.createLineBorder(Config.getBorderColor()));
+        campoMonto.setBorder(javax.swing.BorderFactory.createLineBorder(Config.getBorderColor()));
         fechaLabel.setForeground(Config.getContrastColor());
-        fechaLabel2.setForeground(Config.getContrastColor());
         cuentaLabel.setForeground(Config.getContrastColor());
         montoLabel.setForeground(Config.getContrastColor());
-        montoLabel2.setForeground(Config.getContrastColor());
+        fechaLabel2.setForeground(Config.getSecondaryTextColor());
+        montoLabel2.setForeground(Config.getSecondaryTextColor());
     }
 
-    public Icon setIcono(String url, JButton boton) {
-        ImageIcon icon = new ImageIcon(getClass().getResource(url));
-        
-        int ancho = boton.getWidth();
-        int alto = boton.getHeight();
-        
-        ImageIcon icono = new ImageIcon(icon.getImage().getScaledInstance(ancho, alto, Image.SCALE_DEFAULT));
-        
-        return icono;
-    }
-    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -70,15 +87,15 @@ public class IngRegistros extends javax.swing.JFrame implements ThemeInterface{
         ingRegBtn = new javax.swing.JButton();
         cancelBtn = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setBackground(Paleta.BLANCO);
 
-        Header.setBackground(new java.awt.Color(102, 102, 255));
+        Header.setBackground(Paleta.AZUL_MARINO);
 
-        titleLabel.setBackground(new java.awt.Color(102, 0, 0));
+        titleLabel.setBackground(Paleta.AZUL_MARINO);
         titleLabel.setFont(new java.awt.Font("Swis721 BT", 1, 56)); // NOI18N
-        titleLabel.setForeground(new java.awt.Color(255, 255, 255));
+        titleLabel.setForeground(Paleta.BLANCO);
         titleLabel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         titleLabel.setText("Proyecto Premier");
         titleLabel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -89,7 +106,7 @@ public class IngRegistros extends javax.swing.JFrame implements ThemeInterface{
         });
 
         jLabel2.setFont(new java.awt.Font("Segoe UI Light", 2, 24)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(204, 204, 204));
+        jLabel2.setForeground(Paleta.TEXTO_HEADER);
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("Ingreso de registros");
 
@@ -110,7 +127,7 @@ public class IngRegistros extends javax.swing.JFrame implements ThemeInterface{
                 .addContainerGap(37, Short.MAX_VALUE))
         );
 
-        MainPanel.setBackground(new java.awt.Color(255, 255, 255));
+        MainPanel.setBackground(Paleta.BLANCO);
         MainPanel.setLayout(new java.awt.GridBagLayout());
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -126,12 +143,12 @@ public class IngRegistros extends javax.swing.JFrame implements ThemeInterface{
 
         MainPanel.add(jPanel3, new java.awt.GridBagConstraints());
 
-        panelForm.setBackground(new java.awt.Color(255, 255, 255));
-        panelForm.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
+        panelForm.setBackground(Paleta.BLANCO);
+        panelForm.setBorder(javax.swing.BorderFactory.createLineBorder(Paleta.BORDE));
         panelForm.setPreferredSize(new java.awt.Dimension(470, 490));
 
         campoFecha.setFont(new java.awt.Font("Segoe UI Semilight", 0, 18)); // NOI18N
-        campoFecha.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
+        campoFecha.setBorder(javax.swing.BorderFactory.createLineBorder(Paleta.BORDE));
 
         fechaLabel.setFont(new java.awt.Font("Segoe UI Semilight", 0, 18)); // NOI18N
         fechaLabel.setText("Fecha");
@@ -140,25 +157,25 @@ public class IngRegistros extends javax.swing.JFrame implements ThemeInterface{
         cuentaLabel.setText("Cuenta");
 
         campoMonto.setFont(new java.awt.Font("Segoe UI Semilight", 0, 18)); // NOI18N
-        campoMonto.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
+        campoMonto.setBorder(javax.swing.BorderFactory.createLineBorder(Paleta.BORDE));
 
         montoLabel.setFont(new java.awt.Font("Segoe UI Semilight", 0, 18)); // NOI18N
         montoLabel.setText("Monto registrado (ARS)");
 
         campoCuenta.setFont(new java.awt.Font("Segoe UI Semilight", 0, 18)); // NOI18N
-        campoCuenta.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(153, 153, 153)));
+        campoCuenta.setBorder(javax.swing.BorderFactory.createLineBorder(Paleta.BORDE));
 
-        montoLabel2.setBackground(new java.awt.Color(204, 204, 204));
+        montoLabel2.setBackground(Paleta.TEXTO_SECUNDARIO);
         montoLabel2.setFont(new java.awt.Font("Segoe UI Semilight", 0, 12)); // NOI18N
         montoLabel2.setText("Utilizar símbolos \"+\" o \"-\" para indicar la dirección de la transferencia");
 
-        fechaLabel2.setBackground(new java.awt.Color(204, 204, 204));
+        fechaLabel2.setBackground(Paleta.TEXTO_SECUNDARIO);
         fechaLabel2.setFont(new java.awt.Font("Segoe UI Semilight", 0, 12)); // NOI18N
         fechaLabel2.setText("Formato \"dd-MM-yyyy\"");
 
-        ingRegBtn.setBackground(new java.awt.Color(51, 204, 0));
+        ingRegBtn.setBackground(Paleta.VERDE_OSCURO);
         ingRegBtn.setFont(new java.awt.Font("Segoe UI Semilight", 1, 18)); // NOI18N
-        ingRegBtn.setForeground(new java.awt.Color(255, 255, 255));
+        ingRegBtn.setForeground(Paleta.BLANCO);
         ingRegBtn.setText("Registrar");
         ingRegBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         ingRegBtn.setFocusable(false);
@@ -168,9 +185,9 @@ public class IngRegistros extends javax.swing.JFrame implements ThemeInterface{
             }
         });
 
-        cancelBtn.setBackground(new java.awt.Color(255, 0, 0));
+        cancelBtn.setBackground(Paleta.ROJO_OSCURO);
         cancelBtn.setFont(new java.awt.Font("Segoe UI Semilight", 1, 18)); // NOI18N
-        cancelBtn.setForeground(new java.awt.Color(255, 255, 255));
+        cancelBtn.setForeground(Paleta.BLANCO);
         cancelBtn.setText("Cancelar");
         cancelBtn.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         cancelBtn.setFocusable(false);
@@ -261,27 +278,45 @@ public class IngRegistros extends javax.swing.JFrame implements ThemeInterface{
     }// </editor-fold>//GEN-END:initComponents
 
     private void titleLabelMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_titleLabelMouseClicked
-        this.dispose();
-        new MainUI().setVisible(true);
+        volverAlMenu();
     }//GEN-LAST:event_titleLabelMouseClicked
 
     private void cancelBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cancelBtnActionPerformed
-        this.dispose();
-        new MainUI().setVisible(true);
+        volverAlMenu();
     }//GEN-LAST:event_cancelBtnActionPerformed
 
     private void ingRegBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ingRegBtnActionPerformed
         String fecha = campoFecha.getText();
         String cuenta = campoCuenta.getText();
-        int monto = Integer.parseInt(campoMonto.getText());
+        String montoTexto = campoMonto.getText();
+
+        if (!Validaciones.validarNoVacio(cuenta)) {
+            JOptionPane.showMessageDialog(this, Validaciones.getMensajeCampoVacio("cuenta"),
+                    "Error de validación", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        if (!Validaciones.validarFecha(fecha)) {
+            JOptionPane.showMessageDialog(this, Validaciones.getMensajeFecha(),
+                    "Error de validación", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        // Antes se hacia Integer.parseInt sin try/catch: escribir un decimal
+        // o cualquier texto lanzaba NumberFormatException y el boton no
+        // respondia, sin avisar nada.
+        BigDecimal monto = Validaciones.parsearMonto(montoTexto);
+        if (monto == null) {
+            JOptionPane.showMessageDialog(this, Validaciones.getMensajeMonto(),
+                    "Error de validación", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
 
         IngRegistrosCheck ing = new IngRegistrosCheck();
-        if (ing.ingresarRegistro(fecha, cuenta, monto)) {
+        if (ing.ingresarRegistro(fecha.trim(), cuenta.trim(), monto)) {
             JOptionPane.showMessageDialog(this, "Registro exitoso.");
-            this.dispose();
-            new MainUI().setVisible(true);
+            volverAlMenu();
         } else {
-            JOptionPane.showMessageDialog(this, "Datos Incorrectos.");
+            JOptionPane.showMessageDialog(this, "No se pudo guardar el registro.");
         }
     }//GEN-LAST:event_ingRegBtnActionPerformed
 
